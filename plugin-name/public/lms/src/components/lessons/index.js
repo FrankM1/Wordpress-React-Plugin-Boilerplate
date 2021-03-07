@@ -16,7 +16,7 @@ function Lesson({ courseSlug, lesson, index, completeLesson }) {
                         <span className="ld-icon-checkmark ld-icon"></span>
                     </div>
                     <div className="ld-item-title">
-                        <Link to={`/course/${courseSlug}/lessons/${slug}`}>
+                        <Link to={`/${courseSlug}/lessons/${slug}`}>
                             <span>{title.rendered}</span>
                         </Link>
                     </div>
