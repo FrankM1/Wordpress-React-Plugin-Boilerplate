@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import _ from "lodash";
 
-import LessonsData from "./data";
-import CourseData from "../courses/data";
+import lessonService from './_service'
+import courseService from '../courses/_service'
 
 import { Link, useParams } from "react-router-dom";
   
@@ -30,15 +30,42 @@ function Lesson({ courseSlug, lesson, index, completeLesson }) {
 function Lessons() {
     let { slug } = useParams();
 
-    const courseSlug = slug;
-    const course = _.find(CourseData, { slug: courseSlug });
-    const lessons = _.filter(LessonsData, { course: course.id }).map( lesson => ({...lesson }) );
- 
-    lessons.sort(function(a, b) {
-        return a.menu_order - b.menu_order;
-    });
+    const [loading, setLoading] = useState(true)  
+    const [error, setError] = useState('')  
+    const [lessons, setLessons] = useState([])
+    const [course, setCourse] = useState({})
 
-    // const [lessons, setLessons] = useState( [...data])
+    useEffect(() => {  
+        courseService.getCourse(slug).then(data => {
+           const found = _.find( data, { slug: slug})
+            setLoading(false)  
+            setCourse({...found})  
+            setError('')  
+        })  
+        .catch(error => {  
+            setLoading(false)  
+            setCourse({})  
+            setError('Something went wrong')  
+        })  
+    }, [slug])
+
+    useEffect(() => {  
+        const { id: courseID } = course
+        lessonService.getAllLessons(courseID).then(data => {
+            data.sort(function(a, b) {
+                return a.menu_order - b.menu_order;
+            });
+
+            setLoading(false)  
+            setLessons([...data])  
+            setError('')  
+        })  
+        .catch(error => {  
+            setLoading(false)  
+            setLessons([])  
+            setError('Something went wrong')  
+        })
+    }, [course]) 
 
     // const completeLesson = index => {
     //     const newLessons = [...lessons];
@@ -55,7 +82,7 @@ function Lessons() {
                 </div>
                 <div className="ld-item-list-items ld-lesson-progression">
                     {lessons.map((lesson, index) => (
-                        <Lesson key={index} index={index} courseSlug={courseSlug} lesson={lesson}  />
+                        <Lesson key={index} index={index} courseSlug={slug} lesson={lesson}  />
                     ))}
                 </div>
             </div>

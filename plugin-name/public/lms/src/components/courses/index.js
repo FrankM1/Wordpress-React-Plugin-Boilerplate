@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import axios from "axios";
 import Course from './course'
-import data from './data'
+import courseService from './_service'
 
 export default function Courses() {
-    const [courses, setCourses] = useState([...data])
+    const [loading, setLoading] = useState(true)  
+    const [error, setError] = useState('')  
+    const [courses, setCourses] = useState([])
 
-    useEffect(() => {
-        const headers = {
-            'Content-Type': 'appliation/json',
-            'Access-Control-Allow-Origin': '*',
-        };
+    useEffect(() => {  
+        courseService.getAllCourses().then(data => {
+            data.sort(function(a, b) {
+                return a.menu_order - b.menu_order;
+            });
 
-        axios({
-            method: 'get',
-            url: "https://community.tala.test/wp-json/ldlms/v1/sfwd-courses",
-            config: {
-                headers
-            }
-        }).then(res => {
-           // setCourses([ ...res]);
-        });
-    }, [])
+            setLoading(false)  
+            setCourses([...data])  
+            setError('')  
+        })  
+        .catch(error => {  
+            setLoading(false)  
+            setCourses([])  
+            setError('Something went wrong')  
+        })  
+    }, []) 
 
     return (
         <div>
