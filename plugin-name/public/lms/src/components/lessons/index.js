@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import _ from "lodash";
+
 import LessonsData from "./data";
+import CourseData from "../courses/data";
+
 import { Link, useParams } from "react-router-dom";
   
-function Lesson({ courseID, lesson, index, completeLesson }) {
-    const { title, id } = lesson
+function Lesson({ courseSlug, lesson, index, completeLesson }) {
+    const { title, slug } = lesson
     return (
         <div className="ld-item-list-item ld-expandable ld-item-lesson-item ld-lesson-item-1103 is_not_sample learndash-complete">
             <div className="ld-item-list-item-preview">
@@ -12,11 +16,11 @@ function Lesson({ courseID, lesson, index, completeLesson }) {
                         <span className="ld-icon-checkmark ld-icon"></span>
                     </div>
                     <div className="ld-item-title">
-                        <Link to={`/courses/${courseID}/lesson/${id}`}>
+                        <Link to={`/course/${courseSlug}/lessons/${slug}`}>
                             <span>{title.rendered}</span>
                         </Link>
                     </div>
-                    <button onClick={() => completeLesson(index)}>Complete</button>
+                { /** <button onClick={() => completeLesson(index)}>Complete</button> **/ }
                 </div>
             </div>
         </div>
@@ -24,26 +28,23 @@ function Lesson({ courseID, lesson, index, completeLesson }) {
 }
 
 function Lessons() {
-    let { id } = useParams();
+    let { slug } = useParams();
 
-    const courseID = id; // Budgeting 101
-    const data = LessonsData.map( lesson => ({...lesson, isCompleted: false }) ).filter(lesson => {
-        return ( parseInt(lesson.course, 10) !== parseInt(lesson.course, courseID) ) 
-    });
-
-    data.sort(function(a, b) {
+    const courseSlug = slug;
+    const course = _.find(CourseData, { slug: courseSlug });
+    const lessons = _.filter(LessonsData, { course: course.id }).map( lesson => ({...lesson }) );
+ 
+    lessons.sort(function(a, b) {
         return a.menu_order - b.menu_order;
     });
 
-    const [lessons, setLessons] = useState( [...data])
+    // const [lessons, setLessons] = useState( [...data])
 
-    const completeLesson = index => {
-        const newLessons = [...lessons];
-        newLessons[index].isCompleted = true;
-        setLessons(newLessons);
-    };
-
-    debugger;
+    // const completeLesson = index => {
+    //     const newLessons = [...lessons];
+    //     newLessons[index].isCompleted = true;
+    //     setLessons(newLessons);
+    // };
 
     return (
         <div className="lesson-list learndash-wrapper">
@@ -54,7 +55,7 @@ function Lessons() {
                 </div>
                 <div className="ld-item-list-items ld-lesson-progression">
                     {lessons.map((lesson, index) => (
-                        <Lesson key={index} index={index} courseID={courseID} lesson={lesson} completeLesson={completeLesson} />
+                        <Lesson key={index} index={index} courseSlug={courseSlug} lesson={lesson}  />
                     ))}
                 </div>
             </div>
