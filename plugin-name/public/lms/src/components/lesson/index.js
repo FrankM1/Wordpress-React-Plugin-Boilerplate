@@ -94,7 +94,9 @@ export default function Lesson() {
     }
 
     const { title: { rendered: courseHeaderHTML } } = course
-    const { title: { rendered: headerHTML }, content: { rendered: rawHTML } } = lesson
+    const { title: { rendered: headerHTML }, content: { rendered: rawContentHTML } } = lesson
+
+    const parsedRawHTML = _.replace(rawContentHTML, 'community.tala.ph', 'tala.test');     
 
     return (
         <div>
@@ -123,7 +125,7 @@ export default function Lesson() {
             <div className="lms-header-title">
                 <h2>{DOMPurify.sanitize(headerHTML)}</h2>
             </div>
-            { <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(rawHTML) }} />}
+            { <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(parsedRawHTML) }} />}
         </div>
     )
 }
