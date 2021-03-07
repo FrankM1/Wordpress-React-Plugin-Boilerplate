@@ -1,0 +1,213 @@
+.learndash-wrapper .ld-item-list .ld-item-list-item {
+  border: 2px solid #e2e7ed;
+  border-radius: 6px;
+  margin: 1em 0;
+  background: #fff
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item.ld-is-next {
+  border-color: #00a2e8
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-preview {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-preview .ld-status-icon {
+  margin-right: .5em;
+  margin-top: .25em
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-name {
+  display: flex;
+  flex: 1 1 100%;
+  align-items: top;
+  color: #495255
+}
+
+@media (max-width: 640px) {
+  .learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-name {
+      flex:1
+  }
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-sep {
+  color: #e2e7ed;
+  padding: 0 .5em
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item a.ld-item-name:hover {
+  color: #00a2e8
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item a.ld-item-name:hover .ld-item-title .ld-item-components {
+  color: #728188
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-title .ld-item-components {
+  font-weight: 700;
+  display: block;
+  font-size: .825em;
+  margin-top: .5em;
+  color: #728188
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-title .ld-status {
+  display: inline-block;
+  font-size: .825em
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-title .ld-item-component+.ld-status {
+  margin-left: .5em
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-details {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-details .ld-expand-button {
+  margin-left: 1em
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-details .ld-certificate-link {
+  margin-right: 15px;
+  font-size: 26px;
+  color: #019e7c
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-expanded {
+  position: relative;
+  height: auto;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s ease
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-expanded:before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: -8px;
+  left: 66px;
+  background: #fff;
+  transform: rotate(-45deg);
+  z-index: 9;
+  left: 64px
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-expanded .ld-progress {
+  background: #e2e7ed;
+  padding: 2em 4.125em
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-expanded .ld-item-contents {
+  padding: 2em 4.125em
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-expanded .ld-progress {
+  margin-top: 0
+}
+
+@media (max-width: 640px) {
+  .learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-preview {
+      flex-direction:column;
+      align-items: flex-start
+  }
+
+  .learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-preview .ld-item-details {
+      margin-top: 0;
+      margin-left: 2em
+  }
+
+  .learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-preview .ld-item-details .ld-status {
+      margin-left: 0;
+      margin-right: 1em
+  }
+
+  .learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-preview .ld-item-details .ld-expand-button {
+      margin-left: 0
+  }
+
+  .learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-expanded .ld-item-contents,.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-expanded .ld-progress {
+      padding: 2em 1em
+  }
+
+  .learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-expanded .ld-item-contents {
+      padding-top: 0
+  }
+}
+
+
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-preview .ld-icon-arrow-down {
+  -webkit-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  color: #939597;
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-preview .ld-icon-arrow-down:before {
+  content: "\e984";
+  font: normal normal normal 9px/1 "bb-icons";
+  speak: none;
+  text-decoration: inherit;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition: -webkit-transform .2s;
+  transition: transform .2s;
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item .ld-item-list-item-preview .ld-expanded .ld-icon-arrow-down {
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.learndash-wrapper .ld-progress .ld-progress-heading .ld-progress-stats .ld-progress-percentage {
+  color: inherit;
+  text-transform: none;
+  font-weight: normal;
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item.ld-item-lesson-item .ld-item-list-item-preview .ld-item-details {
+  -webkit-box-ordinal-group: 2;
+  -ms-flex-order: 1;
+  order: 1;
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item.ld-item-lesson-item .ld-item-list-item-preview .ld-item-details .ld-expand-button {
+  margin-left: 0px;
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item.ld-item-lesson-item .ld-item-list-item-preview .ld-item-details .ld-text {
+  display: none;
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item.ld-item-lesson-item .ld-item-list-item-preview .ld-item-name {
+  -webkit-box-ordinal-group: 3;
+  -ms-flex-order: 2;
+  order: 2;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.learndash-wrapper .ld-item-list .ld-item-list-item.ld-item-lesson-item .ld-item-list-item-preview .ld-item-name .ld-item-title {
+  -webkit-box-ordinal-group: 2;
+  -ms-flex-order: 1;
+  order: 1;
+  width: -webkit-calc(100% - 20px);
+  width: calc(100% - 20px);
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0 10px;
+  font-weight: 500;
+}
