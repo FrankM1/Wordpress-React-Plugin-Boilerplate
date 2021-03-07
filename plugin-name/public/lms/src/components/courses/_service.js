@@ -26,7 +26,9 @@ const getCourse = (slug, courseID) => {
     });
 }
 
-export default {
+const services =  {
     getAllCourses,
     getCourse
 }
+
+export default services

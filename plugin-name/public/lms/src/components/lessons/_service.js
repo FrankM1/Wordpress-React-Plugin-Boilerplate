@@ -13,6 +13,8 @@ const getAllLessons = (id) => {
     });
 }
 
-export default {
+const services = {
     getAllLessons
 }
+
+export default services

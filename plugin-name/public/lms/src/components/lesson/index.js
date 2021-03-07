@@ -58,7 +58,7 @@ export default function Lesson() {
                 setLessons([])
                 setError('Something went wrong')
             })
-    }, [course.id])
+    }, [course.id, lessonSlug])
 
     useEffect(() => {
         const found = _.filter(lessons, { course: course.id })
@@ -72,11 +72,24 @@ export default function Lesson() {
         });
 
         const currentIndex = _.findIndex(found, lesson);
+
+        if ( currentIndex == -1){
+            return;
+        }
+
         const nextIndex = currentIndex + 1; 
-        setNextLesson(lessons[nextIndex]);
+
+        if ( currentIndex < nextIndex && nextIndex <= found.length ) {
+            setNextLesson(found[nextIndex]);
+        }
+
+        console.log('lessons', found);
+        console.log('currentIndex', currentIndex);
+        console.log('nextIndex', nextIndex);
 
         const prevIndex = currentIndex - 1; 
-        setPrevLesson(lessons[prevIndex]);
+
+        setPrevLesson(found[prevIndex]);
 
     }, [lessons, lesson, course.id]);
 
@@ -87,16 +100,25 @@ export default function Lesson() {
         if( nextLesson && Object.keys(nextLesson).length !== 0) {
             setNextLessonSlug(`/${nextLesson.slug}`)
         }
-    }, [nextLesson]);
+    }, [nextLesson, prevLesson]);
+
+    if (loading) {
+        return "Loading..."
+    }
+
+    if (error) {
+        return error
+    }
 
     if (Object.keys(course).length === 0 || Object.keys(lesson).length === 0) {
-        return null
+        console.log(lesson)
+        return 'No Data Found'
     }
 
     const { title: { rendered: courseHeaderHTML } } = course
     const { title: { rendered: headerHTML }, content: { rendered: rawContentHTML } } = lesson
 
-    const parsedRawHTML = _.replace(rawContentHTML, 'community.tala.ph', 'tala.test');     
+    const parsedRawHTML = _.replace(rawContentHTML, 'https://community.tala.ph/course', 'http://localhost:3000');     
 
     return (
         <div>
